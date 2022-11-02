@@ -22,36 +22,18 @@ client.connect()
         const watchList = ghibliMovies.collection("watch-list")
         
         //creates index page on the local host
-            app.get('/', (req, res) => {
-                fetchMovies(movies => {
-                    let movieDetails = {
-                        title: movies.title,
-                        movieID: movies.id,
-                        description: movies.description,
-                        movieImage: movies.image
-                    }
-                    console.log(movies)
-                    res.render('pages/index.ejs',  
-                        { movieDetails }
-                    )
-                })
+        app.get('/', (req, res) => {
+            // fetchMovies(movies => {
+            //     let movieDetails = {
+            //         title: movies.title,
+            //         movieID: movies.id,
+            //         description: movies.description,
+            //         movieImage: movies.image
+            //     }
+            //     console.log(movies)
+                res.render('pages/index.ejs')
             })
-    
-            function fetchMovies(movies){
-                fetch(`https://ghibliapi.herokuapp.com/films`)
-                    .then(res => {
-                        if (res.ok) {
-                            return res.json()
-                            } else {
-                                throw "No Path to API";
-                                }
-                        })
-                    .then(res => {
-                        return movies(res);
-                    })
-                    .catch(err => {console.log('API Error')})
-            }
-            console.log("Database 3000!")
+        console.log("Database 3000!")
 
         app.post('/addMovie', async (req, res) => {
 
@@ -63,3 +45,27 @@ client.connect()
 app.listen(3001, () => {
     console.log(`Ghibli in this Bitch!`);
 });
+
+async function fetchMovies(){
+    let movies = await fetch(`https://ghibliapi.herokuapp.com/films`)
+    console.log(movies.status); // 200
+    console.log(movies.statusText); // OK
+    
+    if (movies.status === 200){
+        let movieData = await movies.image
+        console.log(movieData)
+    }
+    // .then(res => {
+    //         if (res.ok) {
+    //             return res.json()
+    //             } else {
+    //                 throw "No Path to API";
+    //                 }
+    //         })
+    //     .then(res => {
+    //         return movies(res);
+    //     })
+    //     .catch(err => {console.log('API Error')})
+}
+
+fetchMovies()
