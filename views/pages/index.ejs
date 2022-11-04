@@ -6,8 +6,12 @@
     <link href="/dist/output.css" rel="stylesheet">
     <title>Ghibli Movie Picker</title>
 </head>
+<header>
+    <%- include('../partials/headers'); %>
+</header>
 <body>
-    <h1 className=" text-teal-500">Hello World!</h1>
+    <main>
+        <h1 className=" text-teal-500">Hello World!</h1>
 
     <ul class="movieList">
         <li></li>
@@ -18,5 +22,14 @@
     <input type="text" name="" id="">
 
     <button type="submit">Add Film to Watch List</button>
+        <div class="jumbotron">
+            <h1>This is great</h1>
+            <p>Welcome to templating using EJS</p>
+        </div>
+    </main>
+      
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
 </body>
 </html>
